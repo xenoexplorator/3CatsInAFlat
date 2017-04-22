@@ -21,7 +21,7 @@ public class CollectableController : MonoBehaviour {
     void TakeItem(PlayerControllerScript player) {
 		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
 				player.AddItem(this.type);
-				Destroy(this);
+				Destroy(gameObject);
 		}
 		// TODO update sprite / object state
 	}
@@ -29,9 +29,4 @@ public class CollectableController : MonoBehaviour {
 	void Examine() {
 		// TODO display examination text object
 	}
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("I am touching another object");
-    }
 }

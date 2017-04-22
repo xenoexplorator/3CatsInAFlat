@@ -17,7 +17,7 @@ public class PlayerControllerScript : MonoBehaviour {
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
     private bool grounded = false;          // Whether or not the player is grounded.
     private Animator anim;                  // Reference to the player's animator component.
-    private List<CollectableType> inventory;
+    private List<CollectableType> inventory = new List<CollectableType>();
 
     private bool search = false;
     
@@ -42,14 +42,6 @@ public class PlayerControllerScript : MonoBehaviour {
             {
                 jump = true;
             }
-            else if (Input.GetKeyDown("up"))
-            {
-                search = true;
-            }
-            else
-            {
-                search = false;
-            }
         }
     }
 
@@ -60,7 +52,7 @@ public class PlayerControllerScript : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
 
         // The Speed animator parameter is set to the absolute value of the horizontal input.
-        anim.SetFloat("Speed", Mathf.Abs(h));
+        //anim.SetFloat("Speed", Mathf.Abs(h));
 
         // If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
@@ -119,9 +111,9 @@ public class PlayerControllerScript : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Collectible")
+        if ((collision.gameObject.tag == "Collectible") && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            collision.gameObject.SendMessage("TakeItem", this);
+            collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
         }
     }
 
