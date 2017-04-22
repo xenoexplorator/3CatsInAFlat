@@ -22,6 +22,13 @@ public class ObjectiveController : MonoBehaviour {
 	void PlaceItem(PlayerControllerScript player, CollectableType item) {
 		player.RemoveItem(item);
 		this.needed.Remove(item);
+		switch(this.type) {
+			case ObjectiveType.Snowman:
+				if (item == CollectableType.Hat) {
+					GlobeManager.HatPlaced = true;
+				}
+				break;
+		}
 	}
 
 	void Interact(PlayerControllerScript player) {
