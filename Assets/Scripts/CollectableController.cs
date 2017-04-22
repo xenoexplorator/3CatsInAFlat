@@ -23,8 +23,10 @@ public class CollectableController : MonoBehaviour {
 				player.AddItem(this.type);
 				Destroy(this);
 		}
+		// TODO update sprite / object state
 	}
 	
 	void Examine() {
+		// TODO display examination text object
 	}
 }
