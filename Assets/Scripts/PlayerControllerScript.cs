@@ -134,13 +134,14 @@ public class PlayerControllerScript : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            anim.SetTrigger("Search");
             if (collision.gameObject.tag == "Collectible")
             {
+                anim.SetTrigger("Search");
                 collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
             }
             else if (collision.gameObject.tag == "Objective" || collision.gameObject.tag == "Door")
             {
+                anim.SetTrigger("Search");
                 collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
             }
         }
