@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public enum CollectableType { Axe, Coal, Hat, Wheel, Wood };
@@ -8,13 +9,21 @@ public class CollectableController : MonoBehaviour {
 
 	public CollectableType type;
 
+	private float examineTimer;
+
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Trigger: " + GetComponent<Collider2D>().isTrigger);
+		this.examineTimer = 0.0f;
     }
 	
 	// Update is called once per frame
 	void Update () {
+		if (this.examineTimer < 0) {
+			this.examineTimer = 0.0f;
+			transform.Find("Description").GetComponent<Renderer>().enabled = false;
+		} else if (this.examineTimer > 0) {
+			this.examineTimer -= Time.deltaTime;
+		}
 	}
 
     void TakeItem(PlayerControllerScript player) {
@@ -26,8 +35,8 @@ public class CollectableController : MonoBehaviour {
 	}
 	
 	void Examine() {
-		// TODO display examination text object
-		var text = transform.Find("Description");
-		text.GetComponent<Renderer>().enabled = !text.GetComponent<Renderer>().enabled;
+		transform.Find("Description").GetComponent<Renderer>().enabled = true;
+		this.examineTimer = 3;
 	}
+
 }
