@@ -59,6 +59,10 @@ public class PlayerControllerScript : MonoBehaviour {
                 jump = true;
             }
         }
+        if (rb.velocity.y == 0)
+        {
+            anim.ResetTrigger("FallStop");
+        }
     }
 
 
