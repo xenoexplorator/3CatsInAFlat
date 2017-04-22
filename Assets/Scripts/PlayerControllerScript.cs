@@ -111,9 +111,16 @@ public class PlayerControllerScript : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if ((collision.gameObject.tag == "Collectible") && Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
+            if (collision.gameObject.tag == "Collectible")
+            {
+                collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
+            }
+            else if (collision.gameObject.tag == "Objective")
+            {
+                collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
+            }
         }
     }
 
