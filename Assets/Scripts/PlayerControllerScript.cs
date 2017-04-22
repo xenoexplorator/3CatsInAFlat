@@ -134,6 +134,7 @@ public class PlayerControllerScript : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            anim.SetTrigger("Search");
             if (collision.gameObject.tag == "Collectible")
             {
                 collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
