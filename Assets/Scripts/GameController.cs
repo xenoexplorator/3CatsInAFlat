@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     static public GameController instance;
     static public int counter = 1;
     private int privateID;
+    public Sprite black;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SceneManager.LoadScene("Globe");
+        
 	}
 	
 	// Update is called once per frame

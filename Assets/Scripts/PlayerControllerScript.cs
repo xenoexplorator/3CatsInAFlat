@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,8 +30,7 @@ public class PlayerControllerScript : MonoBehaviour {
             }
     }
     private Animator anim;                  // Reference to the player's animator component.
-    public List<CollectableType> inventory = new List<CollectableType>();
-	 private Transform inventoryDisplay;
+    private List<CollectableType> inventory = new List<CollectableType>();
     private Rigidbody2D rb;
 
 
@@ -44,7 +42,6 @@ public class PlayerControllerScript : MonoBehaviour {
         // Setting up references.
         groundCheck = transform.Find("groundCheck");
         anim = GetComponent<Animator>();
-		  inventoryDisplay = transform.Find("ItemList");
         rb = GetComponent<Rigidbody2D>();
         DontDestroyOnLoad(gameObject);
     }
@@ -60,6 +57,7 @@ public class PlayerControllerScript : MonoBehaviour {
         {
             if (Input.GetKeyDown("space"))
             {
+                
                 jump = true;
             }
         }
@@ -127,17 +125,10 @@ public class PlayerControllerScript : MonoBehaviour {
         // Switch the way the player is labelled as facing.
         facingRight = !facingRight;
 
-		  // Fix inventory display
-		  Vector3 inventoryPosition = inventoryDisplay.position;
-
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-
-		  // Fix inventory display
-		  inventoryDisplay.position = inventoryPosition;
-		  inventoryDisplay.localScale = theScale * 16.0f;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -169,24 +160,16 @@ public class PlayerControllerScript : MonoBehaviour {
     {
         if (!this.inventory.Contains(item)) {
             this.inventory.Add(item);
-				this.UpdateInventoryDisplay();
 		  }
     }
 
     public void RemoveItem(CollectableType item)
     {
         this.inventory.Remove(item);
-		  this.UpdateInventoryDisplay();
     }
 
     public bool HasItem(CollectableType item)
     {
         return this.inventory.Contains(item);
     }
-
-	 private void UpdateInventoryDisplay() {
-		 var mesh = this.inventoryDisplay.GetComponent<TextMesh>();
-		 var inventoryNames = this.inventory.Select(item => CollectableController.ItemNames[(int)item]);
-		 mesh.text = "Items: " + string.Join(", ", inventoryNames.ToArray());
-	 }
 }
