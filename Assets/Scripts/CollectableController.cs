@@ -23,9 +23,11 @@ public class CollectableController : MonoBehaviour {
 				player.AddItem(this.type);
 				Destroy(this);
 		}
+		// TODO update sprite / object state
 	}
 	
 	void Examine() {
+		// TODO display examination text object
 	}
 
     private void OnTriggerStay2D(Collider2D collision)

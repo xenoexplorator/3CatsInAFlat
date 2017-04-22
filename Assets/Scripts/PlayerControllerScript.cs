@@ -17,6 +17,7 @@ public class PlayerControllerScript : MonoBehaviour {
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
     private bool grounded = false;          // Whether or not the player is grounded.
     private Animator anim;                  // Reference to the player's animator component.
+    private List<CollectableType> inventory;
 
     private bool search = false;
     
@@ -126,14 +127,18 @@ public class PlayerControllerScript : MonoBehaviour {
 
     public void AddItem(CollectableType item)
     {
+        if (!this.inventory.Contains(item)) {
+            this.inventory.Add(item);
+		  }
     }
 
     public void RemoveItem(CollectableType item)
     {
+        this.inventory.Remove(item);
     }
 
     public bool HasItem(CollectableType item)
     {
-        return false;
+        return this.inventory.Contains(item);
     }
 }
