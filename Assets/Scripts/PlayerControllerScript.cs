@@ -31,6 +31,7 @@ public class PlayerControllerScript : MonoBehaviour {
     }
     private Animator anim;                  // Reference to the player's animator component.
     private List<CollectableType> inventory = new List<CollectableType>();
+	 private Transform inventoryDisplay;
     private Rigidbody2D rb;
 
 
@@ -42,6 +43,7 @@ public class PlayerControllerScript : MonoBehaviour {
         // Setting up references.
         groundCheck = transform.Find("groundCheck");
         anim = GetComponent<Animator>();
+		  inventoryDisplay = transform.Find("ItemList");
         rb = GetComponent<Rigidbody2D>();
         DontDestroyOnLoad(gameObject);
     }
@@ -125,10 +127,17 @@ public class PlayerControllerScript : MonoBehaviour {
         // Switch the way the player is labelled as facing.
         facingRight = !facingRight;
 
+		  // Save inventory display position
+		  Vector3 inventoryPosition = inventoryDisplay.position;
+
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+		  // Restore inventory display position
+		  inventoryDisplay.position = inventoryPosition;
+		  inventoryDisplay.localScale = theScale * 16.0f;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -158,6 +167,7 @@ public class PlayerControllerScript : MonoBehaviour {
 
     public void AddItem(CollectableType item)
     {
+        Debug.Log("take this");
         if (!this.inventory.Contains(item)) {
             this.inventory.Add(item);
 		  }
