@@ -21,6 +21,7 @@ public class CollectableController : MonoBehaviour {
 		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
 				player.AddItem(this.type);
 				Destroy(gameObject);
+            WarnManagers();
 		}
 		// TODO update sprite / object state
 	}
@@ -30,4 +31,22 @@ public class CollectableController : MonoBehaviour {
 		var text = transform.Find("Description");
 		text.GetComponent<Renderer>().enabled = !text.GetComponent<Renderer>().enabled;
 	}
+
+    void WarnManagers()
+    {
+        switch (type){
+            case CollectableType.Axe:
+                
+                break;
+            case CollectableType.Coal:
+                break;
+            case CollectableType.Hat:
+                HouseManager.hatPicked = true;
+                break;
+            case CollectableType.Wheel:
+                break;
+            case CollectableType.Wood:
+                break;
+        }
+    }
 }
