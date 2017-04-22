@@ -10,15 +10,15 @@ public class CollectableController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        Debug.Log("Trigger: " + GetComponent<Collider2D>().isTrigger);
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-	void TakeItem(PlayerControllerScript player) {
+    void TakeItem(PlayerControllerScript player) {
 		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
 				player.AddItem(this.type);
 				Destroy(this);
@@ -27,4 +27,9 @@ public class CollectableController : MonoBehaviour {
 	
 	void Examine() {
 	}
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("I am touching another object");
+    }
 }

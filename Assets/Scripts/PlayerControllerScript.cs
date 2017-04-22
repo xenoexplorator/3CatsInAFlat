@@ -18,6 +18,8 @@ public class PlayerControllerScript : MonoBehaviour {
     private bool grounded = false;          // Whether or not the player is grounded.
     private Animator anim;                  // Reference to the player's animator component.
 
+    private bool search = false;
+    
 
     void Awake()
     {
@@ -33,8 +35,21 @@ public class PlayerControllerScript : MonoBehaviour {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         // If the jump button is pressed and the player is grounded then the player should jump.
-        if (Input.GetKeyDown("space") && grounded)
-            jump = true;
+        if (grounded)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                jump = true;
+            }
+            else if (Input.GetKeyDown("up"))
+            {
+                search = true;
+            }
+            else
+            {
+                search = false;
+            }
+        }
     }
 
 
@@ -44,7 +59,7 @@ public class PlayerControllerScript : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
 
         // The Speed animator parameter is set to the absolute value of the horizontal input.
-        //anim.SetFloat("Speed", Mathf.Abs(h));
+        anim.SetFloat("Speed", Mathf.Abs(h));
 
         // If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
@@ -81,7 +96,13 @@ public class PlayerControllerScript : MonoBehaviour {
             // Make sure the player can't jump again until the jump conditions from Update are satisfied.
             jump = false;
         }
+        if (search)
+        {
+
+            search = false;
+        }
     }
+
 
 
     void Flip()
@@ -93,6 +114,14 @@ public class PlayerControllerScript : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Collectible")
+        {
+            collision.gameObject.SendMessage("TakeItem", this);
+        }
     }
 
     public void AddItem(CollectableType item)
