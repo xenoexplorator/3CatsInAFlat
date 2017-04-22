@@ -17,14 +17,14 @@ public class CollectableController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void TakeItem(PlayerControllerScript player) {
+		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
+				player.AddItem(this.type);
+				Destroy(this);
+		}
+	}
 	
-	void Collect(PlayerControllerScript player) {
-		//player.addItem(self.Name);
-	}
-
-	void Use() {
-	}
-
 	void Examine() {
 	}
 }

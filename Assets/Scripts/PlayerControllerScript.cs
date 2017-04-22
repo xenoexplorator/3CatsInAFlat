@@ -13,4 +13,14 @@ public class PlayerControllerScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public void AddItem(CollectableType item) {
+	}
+
+	public void RemoveItem(CollectableType item) {
+	}
+
+	public bool HasItem(CollectableType item) {
+		return false;
+	}
 }
