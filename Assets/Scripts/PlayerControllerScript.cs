@@ -43,6 +43,7 @@ public class PlayerControllerScript : MonoBehaviour {
         groundCheck = transform.Find("groundCheck");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        DontDestroyOnLoad(gameObject);
     }
 
 
