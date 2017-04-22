@@ -7,6 +7,7 @@ public class DeadPineScript : ObjectiveController
     bool falling = false;
     float rotation = 0;
     public GameObject rotationPoint;
+    public GameObject woodStack;
     new protected void Update()
     {
         if(falling)
@@ -16,8 +17,8 @@ public class DeadPineScript : ObjectiveController
             rotation += 0.025f;
             if(rotation >= 2.2)
             {
+                Instantiate(woodStack, rotationPoint.transform.position, Quaternion.identity);
                 Destroy(gameObject);
-                //Create pile of wood
             }
         }
     }

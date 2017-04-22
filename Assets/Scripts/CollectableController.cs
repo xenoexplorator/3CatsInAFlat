@@ -102,9 +102,9 @@ public class CollectableController : MonoBehaviour {
 
 	 void TakeItem(PlayerControllerScript player) {
 
-		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
+		//if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
 
-				player.AddItem(this.type);
+		    player.AddItem(this.type);
 
             if (type == CollectableType.Coal)
             {
@@ -116,7 +116,7 @@ public class CollectableController : MonoBehaviour {
             }
 				WarnManagers();
 
-		}
+		//}
 
 		// TODO update sprite / object state
 
