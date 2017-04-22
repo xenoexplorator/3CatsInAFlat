@@ -26,6 +26,7 @@ public class ObjectiveController : MonoBehaviour {
 
 	void Interact(PlayerControllerScript player) {
 		for (var i = needed.Count - 1; i >= 0; i--) {
+			var item = needed[i];
 			if (player.HasItem(item)) {
 				this.PlaceItem(player, item);
 				break;
