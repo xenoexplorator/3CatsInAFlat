@@ -15,7 +15,6 @@ public class CollectableController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     void TakeItem(PlayerControllerScript player) {
@@ -28,5 +27,7 @@ public class CollectableController : MonoBehaviour {
 	
 	void Examine() {
 		// TODO display examination text object
+		var text = transform.Find("Description");
+		text.GetComponent<Renderer>().enabled = !text.GetComponent<Renderer>().enabled;
 	}
 }

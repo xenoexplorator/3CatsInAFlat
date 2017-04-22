@@ -122,6 +122,10 @@ public class PlayerControllerScript : MonoBehaviour {
                 collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
             }
         }
+		  else if (Input.GetKeyDown(KeyCode.LeftControl))
+		  {
+			   collision.gameObject.SendMessage("Examine", SendMessageOptions.RequireReceiver);
+		  }
     }
 
     public void AddItem(CollectableType item)
