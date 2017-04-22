@@ -15,4 +15,9 @@ public class ObjectiveController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void PlaceItem(PlayerControllerScript player, CollectableType item) {
+		player.RemoveItem(item);
+	}
+
 }

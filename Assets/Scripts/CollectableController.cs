@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CollectableType { Axe, Coal, Hat, Wheel, Wood };
+
 public class CollectableController : MonoBehaviour {
+
+	public CollectableType type;
 
 	// Use this for initialization
 	void Start () {
@@ -12,5 +16,15 @@ public class CollectableController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void TakeItem(PlayerControllerScript player) {
+		if (this.type != CollectableType.Wood || player.HasItem(CollectableType.Axe)) {
+				player.AddItem(this.type);
+				Destroy(this);
+		}
+	}
+	
+	void Examine() {
 	}
 }
