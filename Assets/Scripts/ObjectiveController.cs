@@ -9,17 +9,17 @@ public class ObjectiveController : MonoBehaviour {
 	public ObjectiveType type;
 	public List<CollectableType> needed;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
 		
 	}
 
-	void PlaceItem(PlayerControllerScript player, CollectableType item) {
+    protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
 		player.RemoveItem(item);
 		this.needed.Remove(item);
 		switch(this.type) {
@@ -31,7 +31,7 @@ public class ObjectiveController : MonoBehaviour {
 		}
 	}
 
-	void Interact(PlayerControllerScript player) {
+	protected void Interact(PlayerControllerScript player) {
 		for (var i = needed.Count - 1; i >= 0; i--) {
 			var item = needed[i];
 			if (player.HasItem(item)) {
@@ -42,7 +42,7 @@ public class ObjectiveController : MonoBehaviour {
 		// TODO update sprite / object state
 	}
 
-	void Examine() {
+    protected void Examine() {
 		// TODO display examination text object
 	}
 
