@@ -15,7 +15,15 @@ public class PlayerControllerScript : MonoBehaviour {
     public float jumpForce = 30f;         // Amount of force added when the player jumps.
 
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
-    private bool grounded = false;          // Whether or not the player is grounded.
+    private bool grounded;
+    private bool Grounded
+    {
+        get { return grounded;}
+        set { if ((value == true) && value != grounded)
+                if (anim != null)
+                    anim.SetTrigger("StopFall");
+                }
+    }
     private Animator anim;                  // Reference to the player's animator component.
     private List<CollectableType> inventory = new List<CollectableType>();
 
@@ -33,10 +41,10 @@ public class PlayerControllerScript : MonoBehaviour {
     void Update()
     {
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        Grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         // If the jump button is pressed and the player is grounded then the player should jump.
-        if (grounded)
+        if (Grounded)
         {
             if (Input.GetKeyDown("space"))
             {
@@ -117,7 +125,7 @@ public class PlayerControllerScript : MonoBehaviour {
             {
                 collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
             }
-            else if (collision.gameObject.tag == "Objective")
+            else if (collision.gameObject.tag == "Objective" || collision.gameObject.tag == "Door")
             {
                 collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
             }
