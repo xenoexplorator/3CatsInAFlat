@@ -139,9 +139,13 @@ public class PlayerControllerScript : MonoBehaviour {
                 anim.SetTrigger("Search");
                 collision.gameObject.SendMessage("TakeItem", this, SendMessageOptions.RequireReceiver);
             }
-            else if (collision.gameObject.tag == "Objective" || collision.gameObject.tag == "Door")
+            else if (collision.gameObject.tag == "Objective")
             {
                 anim.SetTrigger("Search");
+                collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
+            }
+            else if (collision.gameObject.tag == "Door")
+            {
                 collision.gameObject.SendMessage("Interact", this, SendMessageOptions.RequireReceiver);
             }
         }
