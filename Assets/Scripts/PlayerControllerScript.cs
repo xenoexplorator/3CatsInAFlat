@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class PlayerControllerScript : MonoBehaviour {
                         anim.SetTrigger("FallStop");
             }
             grounded = value;
-            }
+			}
     }
     private Animator anim;                  // Reference to the player's animator component.
     private List<CollectableType> inventory = new List<CollectableType>();
@@ -167,19 +168,26 @@ public class PlayerControllerScript : MonoBehaviour {
 
     public void AddItem(CollectableType item)
     {
-        Debug.Log("take this");
         if (!this.inventory.Contains(item)) {
             this.inventory.Add(item);
+				this.UpdateInventoryDisplay();
 		  }
     }
 
     public void RemoveItem(CollectableType item)
     {
         this.inventory.Remove(item);
+        this.UpdateInventoryDisplay();
     }
 
     public bool HasItem(CollectableType item)
     {
         return this.inventory.Contains(item);
     }
+
+	 private void UpdateInventoryDisplay() {
+		 var mesh = this.inventoryDisplay.GetComponent<TextMesh>();
+		 var inventoryNames = this.inventory.Select(item => Utilities.ItemNames[(int)item]);
+		 mesh.text = "Items: " + string.Join(", ", inventoryNames.ToArray());
+	 }
 }

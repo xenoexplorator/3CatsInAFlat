@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SceneManager.LoadScene("Globe");
-        
 	}
 	
 	// Update is called once per frame

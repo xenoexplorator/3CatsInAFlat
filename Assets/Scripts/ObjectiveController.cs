@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ObjectiveType { DeadPine, Fireplace, LivePine, Snowman, SnowPile, Train };
-
 public class ObjectiveController : MonoBehaviour {
 
 	public ObjectiveType type;
-	public List<CollectableType> needed;
+	public CollectableType needed;
 
-    // Use this for initialization
-    protected void Start () {
+	// Use this for initialization
+	void Start () {
 		
 	}
 	
@@ -19,9 +17,8 @@ public class ObjectiveController : MonoBehaviour {
 		
 	}
 
-    protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
+	protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
 		player.RemoveItem(item);
-		this.needed.Remove(item);
 		switch(this.type) {
 			case ObjectiveType.Snowman:
 				if (item == CollectableType.Hat) {
@@ -39,11 +36,15 @@ public class ObjectiveController : MonoBehaviour {
 				break;
 			}
 		}
-		// TODO update sprite / object state
 	}
 
-    protected void Examine() {
-		// TODO display examination text object
+	protected void Examine() {
+		if (player.HasItem(needed)) {
+			PlaceItem(player, needed);
+		}
+	}
+
+	protected void Examine() {
 	}
 
 }
