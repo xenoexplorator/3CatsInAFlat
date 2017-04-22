@@ -15,6 +15,8 @@ public class CollectableController : MonoBehaviour {
 	public float TextHangTime = 2.0f;
 	public float TextFadeTime = 1.0f;
 	public Vector3 FadeMovement = Vector3.up / 2.0f;
+
+	static public string[] ItemNames = { "Axe", "Coal", "Hat", "Wheel", "Wood " };
 
 	// Use this for initialization
 	void Start () {
