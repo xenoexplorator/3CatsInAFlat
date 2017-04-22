@@ -15,17 +15,24 @@ public class PlayerControllerScript : MonoBehaviour {
     public float jumpForce = 30f;         // Amount of force added when the player jumps.
 
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
-    private bool grounded;
+    private bool grounded = false;
     private bool Grounded
     {
         get { return grounded;}
-        set { if ((value == true) && value != grounded)
+        set {
+            if ((value == true) && value != grounded)
+            {
                 if (anim != null)
-                    anim.SetTrigger("StopFall");
-                }
+                    if((rb != null) && rb.velocity.y < 0)
+                        anim.SetTrigger("FallStop");
+            }
+            grounded = value;
+            }
     }
     private Animator anim;                  // Reference to the player's animator component.
     private List<CollectableType> inventory = new List<CollectableType>();
+    private Rigidbody2D rb;
+
 
     private bool search = false;
     
@@ -35,6 +42,7 @@ public class PlayerControllerScript : MonoBehaviour {
         // Setting up references.
         groundCheck = transform.Find("groundCheck");
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -60,7 +68,7 @@ public class PlayerControllerScript : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
 
         // The Speed animator parameter is set to the absolute value of the horizontal input.
-        //anim.SetFloat("Speed", Mathf.Abs(h));
+        anim.SetFloat("Speed", Mathf.Abs(h));
 
         // If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
         if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
@@ -85,7 +93,7 @@ public class PlayerControllerScript : MonoBehaviour {
         if (jump)
         {
             // Set the Jump animator trigger parameter.
-            //anim.SetTrigger("Jump");
+            anim.SetTrigger("Jump");
 
             // Play a random jump audio clip.
             //int i = Random.Range(0, jumpClips.Length);
