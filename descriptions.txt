@@ -13,4 +13,4 @@ Snowman/Visage: This snowman is missing something
 Snowman/Hat: This snowman is missing something
 Snowman/Visage+Hat: A snowman friend for you
 Train/Brisé: A broken steam train
-Train/Réparé:
+Train/Réparé: A steam train running on time
