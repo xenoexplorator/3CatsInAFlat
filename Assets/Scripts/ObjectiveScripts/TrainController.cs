@@ -11,9 +11,16 @@ public class TrainController : ObjectiveController {
     public GameObject leftStationOrigin;
     public GameObject rightStationOrigin;
 
+    private float maxspeed = 8;
+    private float currentspeed = 0;
+    private float acceleration = 0.01f;
+
+    public BoxCollider2D trainNose;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        anim.ResetTrigger("Roll");
     }
 
     new private void Update()
@@ -27,9 +34,50 @@ public class TrainController : ObjectiveController {
         }
         if(IsInStation == false)
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 4, gameObject.transform.position.y, gameObject.transform.position.z);
+            trainNose.enabled = true;
+            int h = 1;
+            if (positionSide)
+                h = -1;
+            gameObject.transform.position = new Vector3(
+                gameObject.transform.position.x + (currentspeed * h), 
+                gameObject.transform.position.y, 
+                gameObject.transform.position.z);
+            currentspeed += acceleration;
+        }
+        else
+        {
+            trainNose.enabled = false;
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("Train Stopped trigger collision with object: " + collision.gameObject.name);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Train entered trigger collision with object: " + collision.gameObject.name);
+            if (collision.gameObject.tag == "Station")
+            {
+            gameObject.transform.position = collision.gameObject.transform.position;
+            gameObject.transform.rotation = collision.gameObject.transform.rotation;
+            gameObject.transform.localScale = collision.gameObject.transform.localScale;
+            positionSide = !positionSide;
+            IsInStation = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Train entered collision with object: " + collision.gameObject.name);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Train stopped collision with object: " + collision.gameObject.name);
+    }
+
 
     new protected void Interact(PlayerControllerScript player)
     {
@@ -40,24 +88,26 @@ public class TrainController : ObjectiveController {
         else
         {
             base.Interact(player);
+            anim.SetTrigger("Roll");
         }
     }
 
     private void ChangeStation()
     {
-        if(positionSide == false)
-        {
-            gameObject.transform.position = rightStationOrigin.transform.position;
-            gameObject.transform.rotation = rightStationOrigin.transform.rotation;
-            gameObject.transform.localScale = rightStationOrigin.transform.localScale;
-            positionSide = true;
-        }
-        else
-        {
-            gameObject.transform.position = leftStationOrigin.transform.position;
-            gameObject.transform.rotation = leftStationOrigin.transform.rotation;
-            gameObject.transform.localScale = leftStationOrigin.transform.localScale;
-            positionSide = false;
-        }
+        IsInStation = false;
+        //if(positionSide == false)
+        //{
+        //    gameObject.transform.position = rightStationOrigin.transform.position;
+        //    gameObject.transform.rotation = rightStationOrigin.transform.rotation;
+        //    gameObject.transform.localScale = rightStationOrigin.transform.localScale;
+        //    positionSide = true;
+        //}
+        //else
+        //{
+        //    gameObject.transform.position = leftStationOrigin.transform.position;
+        //    gameObject.transform.rotation = leftStationOrigin.transform.rotation;
+        //    gameObject.transform.localScale = leftStationOrigin.transform.localScale;
+        //    positionSide = false;
+        //}
     }
 }
