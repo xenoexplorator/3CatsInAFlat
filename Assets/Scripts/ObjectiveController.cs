@@ -14,7 +14,9 @@ public class ObjectiveController : MonoBehaviour {
 		manager = GameObject.Find("Manager").GetComponent<IManager>();
 		if (collectable != null) {
 			collectable.SetActive(manager.HasPlaced(needed));
-		}
+            if(needed==CollectableType.Wood && manager.HasPlaced(CollectableType.Wood))
+                gameObject.tag = "Untagged";
+        }
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,10 @@ public class ObjectiveController : MonoBehaviour {
 		if (coll != null) {
 			coll.SetActive(true);
 		}
+        if(item == CollectableType.Wood)
+        {
+            gameObject.tag = "Untagged";
+        }
 		manager.PlaceItem(item);
 	}
 

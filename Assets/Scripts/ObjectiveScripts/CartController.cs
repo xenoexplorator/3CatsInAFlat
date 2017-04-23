@@ -16,6 +16,7 @@ public class CartController : CollectableController {
 	}
 	
 	new protected void Remove() {
-		Destroy(this);
+        gameObject.tag = "Untagged";
+        Destroy(this);
 	}
 }

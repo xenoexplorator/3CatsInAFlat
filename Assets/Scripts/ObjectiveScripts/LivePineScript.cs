@@ -12,15 +12,17 @@ public class LivePineScript : ObjectiveController
         if(GlobeManager.PineRaised)
         {
             anim.SetTrigger("GetUp");
+            gameObject.tag = "Untagged";
         }
     }
 
     new protected void Interact(PlayerControllerScript player)
     {
-        if (GlobeManager.PineRaised == false) //manager.pinetree == false
+        if (GlobeManager.PineRaised == false)
         {
             anim.SetTrigger("UnSnow");
             GlobeManager.PineRaised = true;
+            gameObject.tag = "Untagged";
         }
     }
 }
