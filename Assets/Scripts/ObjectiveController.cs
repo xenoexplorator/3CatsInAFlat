@@ -7,11 +7,12 @@ public class ObjectiveController : MonoBehaviour {
 	public ObjectiveType type;
 	public CollectableType needed;
 	public GameObject collectable;
+	public IManager manager;
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		if (collectable != null) {
-			collectable.SetActive(false);
+			collectable.SetActive(manager.HasPlaced(needed));
 		}
 	}
 	
@@ -24,34 +25,7 @@ public class ObjectiveController : MonoBehaviour {
 		if (coll != null) {
 			coll.SetActive(true);
 		}
-		switch(this.type) {
-			case ObjectiveType.Snowman:
-				if (item == CollectableType.Hat) {
-					GlobeManager.HatPlaced = true;
-				}
-				break;
-            case ObjectiveType.Train:
-                if(item == CollectableType.Wheel)
-                {
-                    GlobeManager.WheelPlaced = true;
-                }
-                break;
-            case ObjectiveType.DeadPine:
-                if (item == CollectableType.Axe)
-                {
-                    GlobeManager.PineChopped = true;
-                }
-                break;
-            case ObjectiveType.LivePine:
-                //No idea for the live pine for now
-                break;
-            case ObjectiveType.Fireplace:
-                if (item == CollectableType.Wood)
-                {
-                    HouseManager.fireplaceUsed = true;
-                }
-                break;
-        }
+		manager.PlaceItem(item);
 	}
 
 	protected void Interact(PlayerControllerScript player) {
