@@ -14,7 +14,6 @@ public class DeadPineScript : ObjectiveController
         if(falling)
         {
             gameObject.transform.RotateAround(rotationPoint.transform.position, Vector3.forward,rotation);
-            //gameObject.transform.Rotate(0, 0, rotation);
             rotation += 0.025f;
             if(rotation >= 2.2)
             {

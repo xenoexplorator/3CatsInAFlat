@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerScript : MonoBehaviour {
 
@@ -34,6 +35,9 @@ public class PlayerControllerScript : MonoBehaviour {
     private List<CollectableType> inventory = new List<CollectableType>();
 	 private Transform inventoryDisplay;
     private Rigidbody2D rb;
+    public Camera cam;
+
+    int waitedFrames = 0;
 
     private bool search = false;
 
@@ -112,6 +116,18 @@ public class PlayerControllerScript : MonoBehaviour {
         if (search)
         {
             search = false;
+        }
+        //if((h==0) && (SceneManager.GetActiveScene().name == "Globe") && (gameObject.transform.position.x <= 10) && (gameObject.transform.position.x >= -10))
+        if ((h == 0) && (SceneManager.GetActiveScene().name == "Globe"))
+        {
+            waitedFrames++;
+            if(waitedFrames > 100)
+                CameraScript.state = 1;
+        }
+        else
+        {
+            waitedFrames = 0;
+            CameraScript.state = 0;
         }
     }
 
