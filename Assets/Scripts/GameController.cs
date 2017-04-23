@@ -39,21 +39,16 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		if(GameIsWon())
         {
-            
+            CameraScript.state = 2;
         }
 	}
 
     bool GameIsWon()
     {
         if(SceneManager.GetActiveScene().name == "Globe")
-        {
-            if(false) //victory conditions
-            {
+            if(GlobeManager.CheckForVictory())
                 return true;
-            }
-            return false;
-        }
-        else
-            return false;
+
+        return false;
     }
 }

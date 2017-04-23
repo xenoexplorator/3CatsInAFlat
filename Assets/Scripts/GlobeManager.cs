@@ -31,6 +31,21 @@ public class GlobeManager : MonoBehaviour, IManager {
 		
 	}
 
+    public static bool CheckForVictory()
+    {
+        bool victory = true;
+        foreach(KeyValuePair<CollectableType, bool> c in itemsPlaced)
+        {
+            if(c.Value == false)
+            {
+                victory = false;
+                break;
+            }
+        }
+        return victory;
+        
+    }
+
 	public void PlaceItem(CollectableType item) {
 		itemsPlaced[item] = true;
 	}

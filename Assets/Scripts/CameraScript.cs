@@ -45,12 +45,18 @@ public class CameraScript : MonoBehaviour {
             if (cam.orthographicSize < maxFov)
             {
                 cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + zoomOutSpeed, minFov, maxFov);
+                if (cam.orthographicSize == maxFov)
+                    idle = true;
             }
-            //Add fade to black
-            if(cam.orthographicSize == maxFov)
+            if (idle)
             {
-                SceneManager.LoadScene("End");
+                //Add fade to black
+                if (true)//if fade to black completed
+                {
+                    SceneManager.LoadScene("End");
+                }
             }
+            
         }
     }
 }
