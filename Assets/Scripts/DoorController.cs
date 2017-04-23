@@ -23,10 +23,21 @@ public class DoorController : MonoBehaviour
     void Interact(PlayerControllerScript player)
     {
         SceneManager.LoadScene(TargetScene);
-        Vector3 positionNew = new Vector3(
-            FindObjectOfType<DoorController>().transform.position.x, 
-            FindObjectOfType<DoorController>().transform.position.y+1, 
-            FindObjectOfType<DoorController>().transform.position.z);
+        Vector3 positionNew;
+        if (TargetScene == "Globe")
+        {
+            positionNew = new Vector3(
+                FindObjectOfType<DoorController>().transform.position.x,
+                FindObjectOfType<DoorController>().transform.position.y + 1,
+                FindObjectOfType<DoorController>().transform.position.z);
+        }
+        else
+        {
+            positionNew = new Vector3(
+                FindObjectOfType<DoorController>().transform.position.x,
+                FindObjectOfType<DoorController>().transform.position.y,
+                FindObjectOfType<DoorController>().transform.position.z);
+        }
         player.transform.position = positionNew;
     }
 }
