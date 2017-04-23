@@ -135,6 +135,10 @@ public class PlayerControllerScript : MonoBehaviour {
             waitedFrames = 0;
             CameraScript.state = 0;
         }
+        if(CameraScript.state == 2)
+        {
+            Destroy(this);
+        }
     }
 
     void Flip()
