@@ -8,10 +8,6 @@ public class GlobeManager : MonoBehaviour, IManager {
 	static private Dictionary<CollectableType, bool> itemsPlaced;
 	static public bool PineRaised;
 
-	// Use this for initialization
-	void Start () {
-	}
-
 	static public void Initialize() {
 		itemsFound = new Dictionary<CollectableType, bool>();
 		itemsFound.Add(CollectableType.Axe, false);
@@ -26,24 +22,14 @@ public class GlobeManager : MonoBehaviour, IManager {
 		itemsPlaced.Add(CollectableType.Wheel, false);
 	}
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public static bool CheckForVictory()
     {
-        bool victory = true;
+        bool victory = PineRaised;
         foreach(KeyValuePair<CollectableType, bool> c in itemsPlaced)
         {
-            if(c.Value == false)
-            {
-                victory = false;
-                break;
-            }
+            victory = victory && c.Value;
         }
         return victory;
-        
     }
 
 	public void PlaceItem(CollectableType item) {
