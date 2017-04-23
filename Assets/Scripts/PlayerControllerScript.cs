@@ -174,6 +174,12 @@ public class PlayerControllerScript : MonoBehaviour {
 		  }
     }
 
+    public void GameEnd()
+    {
+        CameraScript.state = 2;
+        Destroy(this);
+    }
+
     public void AddItem(CollectableType item)
     {
         if (!this.inventory.Contains(item)) {

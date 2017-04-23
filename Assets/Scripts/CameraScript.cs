@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraScript : MonoBehaviour {
 
@@ -30,6 +31,19 @@ public class CameraScript : MonoBehaviour {
             {
                 cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + sensitivity, minFov, maxFov);
             }
+        }
+        else if (state ==2)
+        {
+            if (cam.orthographicSize < maxFov)
+            {
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + sensitivity, minFov, maxFov);
+            }
+            //Add fade to black
+            if(cam.orthographicSize == maxFov)
+            {
+                SceneManager.LoadScene("End");
+            }
+                
         }
     }
 }

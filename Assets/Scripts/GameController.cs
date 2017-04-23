@@ -37,6 +37,23 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(GameIsWon())
+        {
+            
+        }
 	}
+
+    bool GameIsWon()
+    {
+        if(SceneManager.GetActiveScene().name == "Globe")
+        {
+            if(false) //victory conditions
+            {
+                return true;
+            }
+            return false;
+        }
+        else
+            return false;
+    }
 }
