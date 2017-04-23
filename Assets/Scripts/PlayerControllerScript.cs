@@ -120,9 +120,15 @@ public class PlayerControllerScript : MonoBehaviour {
         //if((h==0) && (SceneManager.GetActiveScene().name == "Globe") && (gameObject.transform.position.x <= 10) && (gameObject.transform.position.x >= -10))
         if ((h == 0) && (SceneManager.GetActiveScene().name == "Globe"))
         {
-            waitedFrames++;
-            if(waitedFrames > 100)
-                CameraScript.state = 1;
+            if (CameraScript.idle)
+            {
+                waitedFrames++;
+                if (waitedFrames > 100)
+                {
+                    CameraScript.state = 1;
+                    CameraScript.idle = false;
+                }
+            }
         }
         else
         {
