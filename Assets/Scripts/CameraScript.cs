@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CameraScript : MonoBehaviour {
 
+public class CameraScript : MonoBehaviour {
+    
     public float minFov;
     public float maxFov;
     public float sensitivity;
@@ -13,6 +14,7 @@ public class CameraScript : MonoBehaviour {
     static public int state = 0; //0 zoom on player, 1 zoom-out, 2 zoom out end game
     [HideInInspector]
     static public bool idle = false;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -45,18 +47,34 @@ public class CameraScript : MonoBehaviour {
             if (cam.orthographicSize < maxFov)
             {
                 cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + (zoomOutSpeed*3), minFov, maxFov);
-                if (cam.orthographicSize == maxFov)
+                if (cam.orthographicSize >= maxFov/2)
                     idle = true;
             }
             if (idle)
             {
-                //Add fade to black
-                if (true)//if fade to black completed
-                {
-                    SceneManager.LoadScene("End");
-                }
+                FadeToBlack(10f);
+                StartCoroutine("WaitEndOfFade");
             }
             
         }
+    }
+
+    IEnumerator WaitEndOfFade()
+    {
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene("End");
+        Destroy(player);
+    }
+
+    static public void FadeToBlack(float seconds)
+    {
+        iTween.CameraFadeAdd();
+        iTween.CameraFadeTo(1.0f, seconds);
+    }
+
+    static public void FadeFromBlack(float seconds)
+    {
+        iTween.CameraFadeAdd();
+        iTween.CameraFadeFrom(1.0f, seconds);
     }
 }
