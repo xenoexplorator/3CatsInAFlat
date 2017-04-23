@@ -23,11 +23,13 @@ public class GlobeManager : MonoBehaviour, IManager {
 	}
 
 	static public void Initialize() {
+		itemsFound = new Dictionary<CollectableType, bool>();
 		itemsFound.Add(CollectableType.Axe, false);
 		itemsFound.Add(CollectableType.Coal, false);
 		itemsFound.Add(CollectableType.Wheel, false);
 		itemsFound.Add(CollectableType.Wood, false);
 
+		itemsPlaced = new Dictionary<CollectableType, bool>();
 		itemsPlaced.Add(CollectableType.Axe, false);
 		itemsPlaced.Add(CollectableType.Coal, false);
 		itemsPlaced.Add(CollectableType.Hat, false);
