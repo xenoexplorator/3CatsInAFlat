@@ -27,7 +27,7 @@ public class CollectableController : MonoBehaviour {
 		 Remove();
 	}
 	
-	protected void Remove() {
+	protected virtual void Remove() {
 		Destroy(gameObject);
 	}
 

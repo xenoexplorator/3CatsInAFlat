@@ -38,7 +38,7 @@ public class Examinable : MonoBehaviour {
 		}
 	}
 
-	protected Renderer FindText() {
+	protected virtual Renderer FindText() {
 		return transform.Find("Descriptions/Item").GetComponent<Renderer>();
 	}
 

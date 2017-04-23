@@ -8,8 +8,9 @@ public class LivePineScript : ObjectiveController
 
     protected void Awake()
     {
+        manager = GameObject.Find("Manager").GetComponent<IManager>();
         anim = GetComponent<Animator>();
-        if(GlobeManager.PineRaised)
+        if(manager.HasPlaced(CollectableType.Pine))
         {
             anim.SetTrigger("GetUp");
             gameObject.tag = "Untagged";
@@ -18,10 +19,10 @@ public class LivePineScript : ObjectiveController
 
     new protected void Interact(PlayerControllerScript player)
     {
-        if (GlobeManager.PineRaised == false)
+        if (!manager.HasPlaced(CollectableType.Pine))
         {
             anim.SetTrigger("UnSnow");
-            GlobeManager.PineRaised = true;
+				manager.PlaceItem(CollectableType.Pine);
             gameObject.tag = "Untagged";
         }
     }
