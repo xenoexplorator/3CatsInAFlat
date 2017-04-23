@@ -39,8 +39,9 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		if(GameIsWon())
         {
+            CameraScript.idle = false;
             CameraScript.state = 2;
-            CameraScript.FadeToBlack();
+            //CameraScript.FadeToBlack(10);
         }
 	}
 
