@@ -6,6 +6,7 @@ public class GlobeManager : MonoBehaviour, IManager {
 
 	static private Dictionary<CollectableType, bool> itemsFound;
 	static private Dictionary<CollectableType, bool> itemsPlaced;
+	static public bool PineRaised;
 
 	// Use this for initialization
 	void Start () {
