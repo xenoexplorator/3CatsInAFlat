@@ -8,6 +8,8 @@ public class TrainController : ObjectiveController {
     public SpriteRenderer missingWheel;
     public Animator anim;
     private bool IsInStation = true;
+    public GameObject leftStationOrigin;
+    public GameObject rightStationOrigin;
 
     private void Awake()
     {
@@ -22,6 +24,10 @@ public class TrainController : ObjectiveController {
             {
                 missingWheel.enabled = true;
             }
+        }
+        if(IsInStation == false)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 4, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 
@@ -39,6 +45,6 @@ public class TrainController : ObjectiveController {
 
     private void ChangeStation()
     {
-
+        IsInStation = false;
     }
 }
