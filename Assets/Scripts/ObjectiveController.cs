@@ -7,10 +7,11 @@ public class ObjectiveController : MonoBehaviour {
 	public ObjectiveType type;
 	public CollectableType needed;
 	public GameObject collectable;
-	public IManager manager;
+	protected IManager manager;
 
 	// Use this for initialization
 	protected void Start () {
+		manager = GameObject.Find("Manager").GetComponent<IManager>();
 		if (collectable != null) {
 			collectable.SetActive(manager.HasPlaced(needed));
 		}

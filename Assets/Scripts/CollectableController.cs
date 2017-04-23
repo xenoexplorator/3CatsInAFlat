@@ -9,6 +9,7 @@ public class CollectableController : MonoBehaviour {
 
 	private float examineTimer;
 	private Vector3 textOffset;
+	private IManager manager;
 
 	public float TextHangTime = 2.0f;
 	public float TextFadeTime = 1.0f;
@@ -16,8 +17,9 @@ public class CollectableController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.examineTimer = 0.0f;
+		examineTimer = 0.0f;
 		this.textOffset = new Vector3(0.0f, 0.0f, 0.0f);
+		manager = GameObject.Find("Manager").GetComponent<IManager>();
 	 }
 
 	// Update is called once per frame
@@ -60,31 +62,12 @@ public class CollectableController : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-				WarnManagers();
-
 		//}
-
-		// TODO update sprite / object state
 	}
 	
 	void Examine() {
 		transform.Find("Description").GetComponent<Renderer>().enabled = true;
 		this.examineTimer = TextHangTime + TextFadeTime;
 	}
-
-	void WarnManagers() {
-		switch (type){
-			case CollectableType.Axe:
-				break;
-			case CollectableType.Coal:
-				break;
-			case CollectableType.Hat:
-				HouseManager.hatPicked = true;
-				break;
-			case CollectableType.Wheel:
-				break;
-			case CollectableType.Wood:
-				break;
-		}
-	}
+
 }
