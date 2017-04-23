@@ -24,6 +24,8 @@ public class TrainController : ObjectiveController {
 
     new private void Update()
     {
+		 if (manager == null)
+			 return;
         if(manager.HasPlaced(CollectableType.Wheel))
         {
             if(missingWheel.enabled == false)
@@ -46,12 +48,10 @@ public class TrainController : ObjectiveController {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Train Stopped trigger collision with object: " + collision.gameObject.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Train entered trigger collision with object: " + collision.gameObject.name);
             if (collision.gameObject.tag == "Station")
             {
             gameObject.transform.position = collision.gameObject.transform.position;

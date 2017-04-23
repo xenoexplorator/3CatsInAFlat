@@ -21,7 +21,7 @@ public class PlayerControllerScript : MonoBehaviour {
     {
         get { return grounded;}
         set {
-            if ((value == true) && value != grounded)
+            if (value && value != grounded)
             {
                 if (anim != null)
                     if((rb != null) && rb.velocity.y < 0)
@@ -35,9 +35,7 @@ public class PlayerControllerScript : MonoBehaviour {
 	 private Transform inventoryDisplay;
     private Rigidbody2D rb;
 
-
     private bool search = false;
-    
 
     void Awake()
     {
@@ -49,7 +47,6 @@ public class PlayerControllerScript : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-
     void Update()
     {
         // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
@@ -60,7 +57,6 @@ public class PlayerControllerScript : MonoBehaviour {
         {
             if (Input.GetKeyDown("space"))
             {
-                
                 jump = true;
             }
         }
@@ -69,7 +65,6 @@ public class PlayerControllerScript : MonoBehaviour {
             anim.ResetTrigger("FallStop");
         }
     }
-
 
     void FixedUpdate()
     {
@@ -116,12 +111,9 @@ public class PlayerControllerScript : MonoBehaviour {
         }
         if (search)
         {
-
             search = false;
         }
     }
-
-
 
     void Flip()
     {

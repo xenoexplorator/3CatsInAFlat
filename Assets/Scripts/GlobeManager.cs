@@ -7,17 +7,6 @@ public class GlobeManager : MonoBehaviour, IManager {
 	static private Dictionary<CollectableType, bool> itemsFound;
 	static private Dictionary<CollectableType, bool> itemsPlaced;
 
-	static public bool AxePicked = false;
-	static public bool CoalPicked = false;
-	static public bool WheelPicked = false;
-	static public bool WoodPicked =false;
-	static public bool PineChopped =false;
-
-	static public bool PineRaised =false;
-	static public bool CoalPlaced =false;
-	static public bool HatPlaced = false;
-	static public bool WheelPlaced = false;
-	
 	// Use this for initialization
 	void Start () {
 	}
@@ -45,7 +34,15 @@ public class GlobeManager : MonoBehaviour, IManager {
 		itemsPlaced[item] = true;
 	}
 
+	public void FindItem(CollectableType item) {
+		itemsFound[item] = true;
+	}
+
 	public bool HasPlaced(CollectableType item) {
 		return itemsPlaced[item];
+	}
+
+	public bool HasFound(CollectableType item) {
+		return itemsFound[item];
 	}
 }
