@@ -45,6 +45,19 @@ public class TrainController : ObjectiveController {
 
     private void ChangeStation()
     {
-        IsInStation = false;
+        if(positionSide == false)
+        {
+            gameObject.transform.position = rightStationOrigin.transform.position;
+            gameObject.transform.rotation = rightStationOrigin.transform.rotation;
+            gameObject.transform.localScale = rightStationOrigin.transform.localScale;
+            positionSide = true;
+        }
+        else
+        {
+            gameObject.transform.position = leftStationOrigin.transform.position;
+            gameObject.transform.rotation = leftStationOrigin.transform.rotation;
+            gameObject.transform.localScale = leftStationOrigin.transform.localScale;
+            positionSide = false;
+        }
     }
 }
