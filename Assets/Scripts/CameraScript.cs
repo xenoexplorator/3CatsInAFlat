@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CameraScript : MonoBehaviour {
 
+public class CameraScript : MonoBehaviour {
+    
     public float minFov;
     public float maxFov;
     public float sensitivity;
@@ -50,7 +51,7 @@ public class CameraScript : MonoBehaviour {
             }
             if (idle)
             {
-                //Add fade to black
+                //FadeToBlack();
                 if (true)//if fade to black completed
                 {
                     SceneManager.LoadScene("End");
@@ -58,5 +59,11 @@ public class CameraScript : MonoBehaviour {
             }
             
         }
+    }
+
+    static public void FadeToBlack()
+    {
+        iTween.CameraFadeAdd();
+        iTween.CameraFadeTo(1.0f, 5.0f);
     }
 }

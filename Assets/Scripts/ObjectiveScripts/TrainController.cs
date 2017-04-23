@@ -67,6 +67,7 @@ public class TrainController : ObjectiveController {
     {
         if(manager.HasPlaced(CollectableType.Wheel) && IsInStation)
         {
+            
             anim.SetTrigger("Roll");
             ChangeStation();
         }

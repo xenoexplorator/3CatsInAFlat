@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour {
 		if(GameIsWon())
         {
             CameraScript.state = 2;
+            CameraScript.FadeToBlack();
         }
 	}
 
