@@ -24,10 +24,10 @@ public class DeadPineScript : ObjectiveController
         }
     }
 
-	protected void Interact(PlayerControllerScript player) {
+	new protected void Interact(PlayerControllerScript player) {
 		if (player.HasItem(needed)) {
 			falling = true;
-			PlaceItem(player, needed);
+			PlaceItem(player, needed, collectable);
 		}
 	}
 

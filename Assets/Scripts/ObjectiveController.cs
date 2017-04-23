@@ -10,16 +10,20 @@ public class ObjectiveController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		collectable?.SetActive(false);
+		if (collectable != null) {
+			collectable.SetActive(false);
+		}
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
 	}
 
-	protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
+	protected void PlaceItem(PlayerControllerScript player, CollectableType item, GameObject coll) {
 		player.RemoveItem(item);
-		collectable?.SetActive(true);
+		if (coll != null) {
+			coll.SetActive(true);
+		}
 		switch(this.type) {
 			case ObjectiveType.Snowman:
 				if (item == CollectableType.Hat) {
@@ -52,7 +56,7 @@ public class ObjectiveController : MonoBehaviour {
 
 	protected void Interact(PlayerControllerScript player) {
 		if (player.HasItem(needed)) {
-			PlaceItem(player, needed);
+			PlaceItem(player, needed, collectable);
 		}
 	}
 
