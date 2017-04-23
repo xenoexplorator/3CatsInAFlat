@@ -26,7 +26,28 @@ public class ObjectiveController : MonoBehaviour {
 					GlobeManager.HatPlaced = true;
 				}
 				break;
-		}
+            case ObjectiveType.Train:
+                if(item == CollectableType.Wheel)
+                {
+                    GlobeManager.WheelPlaced = true;
+                }
+                break;
+            case ObjectiveType.DeadPine:
+                if (item == CollectableType.Axe)
+                {
+                    GlobeManager.PineChopped = true;
+                }
+                break;
+            case ObjectiveType.LivePine:
+                //No idea for the live pine for now
+                break;
+            case ObjectiveType.Fireplace:
+                if (item == CollectableType.Wood)
+                {
+                    HouseManager.fireplaceUsed = true;
+                }
+                break;
+        }
 	}
 
 	protected void Interact(PlayerControllerScript player) {
