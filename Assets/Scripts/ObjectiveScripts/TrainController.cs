@@ -21,6 +21,20 @@ public class TrainController : ObjectiveController {
     {
         anim = GetComponent<Animator>();
         anim.ResetTrigger("Roll");
+        SetPosition();
+    }
+
+    private void SetPosition()
+    {
+        GameObject station;
+        if (!positionSide)
+            station = leftStationOrigin;
+        else
+            station = rightStationOrigin;
+
+        gameObject.transform.position = station.transform.position;
+        gameObject.transform.rotation = station.transform.rotation;
+        gameObject.transform.localScale = station.transform.localScale;
     }
 
     new private void Update()
