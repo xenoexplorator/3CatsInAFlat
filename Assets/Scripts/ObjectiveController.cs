@@ -6,20 +6,20 @@ public class ObjectiveController : MonoBehaviour {
 
 	public ObjectiveType type;
 	public CollectableType needed;
+	public GameObject collectable;
 
 	// Use this for initialization
 	void Start () {
-		
+		collectable.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
-		
 	}
 
 	protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
-		Debug.Log("It's not very effective...");
 		player.RemoveItem(item);
+		collectable.SetActive(true);
 		switch(this.type) {
 			case ObjectiveType.Snowman:
 				if (item == CollectableType.Hat) {
