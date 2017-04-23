@@ -8,6 +8,7 @@ public class DeadPineScript : ObjectiveController
     float rotation = 0;
     public GameObject rotationPoint;
     public GameObject woodStack;
+
     new protected void Update()
     {
         if(falling)
@@ -23,13 +24,11 @@ public class DeadPineScript : ObjectiveController
         }
     }
 
-    new protected void Interact(PlayerControllerScript player)
-    {
-        base.Interact(player);
-        if(needed.Count == 0)
-        {
-            falling = true;
-        }
-    }
+	protected void Interact(PlayerControllerScript player) {
+		if (player.HasItem(needed)) {
+			falling = true;
+			PlaceItem(player, needed);
+		}
+	}
 
 }
