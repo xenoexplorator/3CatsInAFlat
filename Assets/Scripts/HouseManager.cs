@@ -7,9 +7,6 @@ public class HouseManager : MonoBehaviour, IManager {
 	static private Dictionary<CollectableType, bool> itemsFound;
 	static private Dictionary<CollectableType, bool> itemsPlaced;
 
-    static public bool hatPicked = false;
-    static public bool fireplaceUsed = false;
-
     void Awake()
     {
 
@@ -20,24 +17,17 @@ public class HouseManager : MonoBehaviour, IManager {
     }
 
 	 static public void Initialize() {
+		itemsFound = new Dictionary<CollectableType, bool>();
+		itemsFound.Add(CollectableType.Hat, false);
+
+		itemsPlaced = new Dictionary<CollectableType, bool>();
+		itemsPlaced.Add(CollectableType.Wood, false);
 	 }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    void TiddyUp()
-    {
-        if (hatPicked)
-        {
-            Destroy(GameObject.Find("Hat"));
-        }
-        if (fireplaceUsed)
-        {
-
-        }
-    }
 
 	public void PlaceItem(CollectableType item) {
 		itemsPlaced[item] = true;
