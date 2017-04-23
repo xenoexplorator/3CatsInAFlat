@@ -51,10 +51,6 @@ public class TrainController : ObjectiveController {
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
             if (collision.gameObject.tag == "Station")
@@ -67,27 +63,16 @@ public class TrainController : ObjectiveController {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Train entered collision with object: " + collision.gameObject.name);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Debug.Log("Train stopped collision with object: " + collision.gameObject.name);
-    }
-
-
     new protected void Interact(PlayerControllerScript player)
     {
         if(manager.HasPlaced(CollectableType.Wheel) && IsInStation)
         {
+            anim.SetTrigger("Roll");
             ChangeStation();
         }
         else
         {
             base.Interact(player);
-            anim.SetTrigger("Roll");
         }
     }
 
@@ -95,19 +80,5 @@ public class TrainController : ObjectiveController {
     {
         IsInStation = false;
         currentspeed = 0;
-        //if(positionSide == false)
-        //{
-        //    gameObject.transform.position = rightStationOrigin.transform.position;
-        //    gameObject.transform.rotation = rightStationOrigin.transform.rotation;
-        //    gameObject.transform.localScale = rightStationOrigin.transform.localScale;
-        //    positionSide = true;
-        //}
-        //else
-        //{
-        //    gameObject.transform.position = leftStationOrigin.transform.position;
-        //    gameObject.transform.rotation = leftStationOrigin.transform.rotation;
-        //    gameObject.transform.localScale = leftStationOrigin.transform.localScale;
-        //    positionSide = false;
-        //}
     }
 }
