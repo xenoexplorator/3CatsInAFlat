@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class SnowmanController : ObjectiveController {
 
+	public CollectableType needed2;
+	public GameObject collectable2;
+
 	new protected void Interact(PlayerControllerScript player) {
-		if (player.HasItem(CollectableType.Coal)) {
-			PlaceItem(player, CollectableType.Coal);
-		} else if (player.HasItem(CollectableType.Hat)) {
-			PlaceItem(player, CollectableType.Hat);
+		if (player.HasItem(needed2)) {
+			PlaceItem(player, needed2, collectable2);
+		} else {
+			base.Interact(player);
 		}
 	}
 }
