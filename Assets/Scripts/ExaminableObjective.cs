@@ -9,6 +9,14 @@ public class ExaminableObjective : Examinable {
 		base.Start();
 	}
 
+	new protected void Update() {
+		base.Update();
+		var incomplete = transform.Find("Descriptions/Incomplete").GetComponent<Renderer>();
+		if (manager.HasPlaced(needed) && incomplete != null && incomplete.enabled) {
+			incomplete.enabled = false;
+		}
+	}
+
 	protected override Renderer FindText() {
 		var path = "Descriptions/" + (manager.HasPlaced(needed) ? "Complete" : "Incomplete");
 		return transform.Find(path).GetComponent<Renderer>();
