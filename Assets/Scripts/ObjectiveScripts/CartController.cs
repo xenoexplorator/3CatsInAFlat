@@ -3,8 +3,6 @@ using UnityEngine;
 public class CartController : CollectableController {
 
 	new protected void Start () {
-		examineTimer = 0.0f;
-		textOffset = new Vector3(0.0f, 0.0f, 0.0f);
 		manager = GameObject.Find("Manager").GetComponent<IManager>();
 		if (manager.HasFound(type)) {
 			Remove();
