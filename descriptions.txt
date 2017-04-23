@@ -1,0 +1,16 @@
+Chapeau: A black felt hat
+Chariot: A cart filled with coal
+Roue: A train's lost wheel
+Tas de bois: A pile of wood
+Hache: A woodcutter's axe
+Cheminée/Éteinte: A cold fireplace
+Cheminée/Allumée: A warm fireplace
+Arbre moche: A dead pine tree
+Arbre beau/Couché: A pine tree held down by the snow
+Arbre beau/Levé: A nice pine tree
+Snowman/Base: Snow piled into the shape of a snowman
+Snowman/Visage: This snowman is missing something
+Snowman/Hat: This snowman is missing something
+Snowman/Visage+Hat: A snowman friend for you
+Train/Brisé: A broken steam train
+Train/Réparé:
