@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class CameraScript : MonoBehaviour {
 
-    public float minFov = 10f;
-    public float maxFov = 90f;
-    public float sensitivity = 2f;
+    public float minFov;
+    public float maxFov;
+    public float sensitivity;
+    public float zoomOutSpeed;
     public Camera cam;
-    static public int state = 1; //0 zoom on player, 1 zoom-out
+    static public int state = 0; //0 zoom on player, 1 zoom-out, 2 zoom out end game
+    [HideInInspector]
+    static public bool idle = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,32 +21,36 @@ public class CameraScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Zoom in
         if (state == 0)
         {
             if (cam.orthographicSize > minFov)
             {
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - (sensitivity*2), minFov, maxFov);
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - sensitivity, minFov, maxFov);
+                if (cam.orthographicSize == minFov)
+                    idle = true;
             }
         }
+        //Zoom out
         else if(state == 1)
         {
             if (cam.orthographicSize < maxFov)
             {
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + sensitivity, minFov, maxFov);
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + zoomOutSpeed, minFov, maxFov);
             }
         }
+        //End game
         else if (state ==2)
         {
             if (cam.orthographicSize < maxFov)
             {
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + sensitivity, minFov, maxFov);
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + zoomOutSpeed, minFov, maxFov);
             }
             //Add fade to black
             if(cam.orthographicSize == maxFov)
             {
                 SceneManager.LoadScene("End");
             }
-                
         }
     }
 }
