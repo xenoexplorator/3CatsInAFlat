@@ -7,11 +7,6 @@ public class HouseManager : MonoBehaviour, IManager {
 	static private Dictionary<CollectableType, bool> itemsFound;
 	static private Dictionary<CollectableType, bool> itemsPlaced;
 
-    void Awake()
-    {
-
-    }
-
     // Use this for initialization
     void Start () {
     }
@@ -33,7 +28,15 @@ public class HouseManager : MonoBehaviour, IManager {
 		itemsPlaced[item] = true;
 	}
 
+	public void FindItem(CollectableType item) {
+		itemsFound[item] = true;
+	}
+
 	public bool HasPlaced(CollectableType item) {
 		return itemsPlaced[item];
+	}
+
+	public bool HasFound(CollectableType item) {
+		return itemsFound[item];
 	}
 }

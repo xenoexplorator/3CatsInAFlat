@@ -6,10 +6,10 @@ public class SnowmanController : ObjectiveController {
 	public GameObject collectable2;
 
 	new protected void Start() {
+		base.Start();
 		if (collectable2 != null) {
 			collectable2.SetActive(manager.HasPlaced(needed2));
 		}
-		base.Start();
 	}
 
 	new protected void Interact(PlayerControllerScript player) {
