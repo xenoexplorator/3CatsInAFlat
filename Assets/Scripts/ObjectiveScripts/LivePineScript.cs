@@ -9,6 +9,10 @@ public class LivePineScript : ObjectiveController
     protected void Awake()
     {
         anim = GetComponent<Animator>();
+        if(false)
+        {
+            anim.SetTrigger("GetUp");
+        }
     }
 
     new protected void Interact(PlayerControllerScript player)
