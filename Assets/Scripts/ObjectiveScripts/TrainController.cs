@@ -13,7 +13,7 @@ public class TrainController : ObjectiveController {
 
     private float maxspeed = 8;
     private float currentspeed = 0;
-    private float acceleration = 0.01f;
+    private float acceleration = 0.005f;
 
 
     private void Awake()
@@ -24,7 +24,7 @@ public class TrainController : ObjectiveController {
 
     new private void Update()
     {
-        if(GlobeManager.WheelPlaced == true)
+        if(manager.HasPlaced(CollectableType.Wheel))
         {
             if(missingWheel.enabled == false)
             {
@@ -75,7 +75,7 @@ public class TrainController : ObjectiveController {
 
     new protected void Interact(PlayerControllerScript player)
     {
-        if(GlobeManager.WheelPlaced && IsInStation)
+        if(manager.HasPlaced(CollectableType.Wheel) && IsInStation)
         {
             ChangeStation();
         }
@@ -89,6 +89,7 @@ public class TrainController : ObjectiveController {
     private void ChangeStation()
     {
         IsInStation = false;
+        currentspeed = 0;
         //if(positionSide == false)
         //{
         //    gameObject.transform.position = rightStationOrigin.transform.position;
