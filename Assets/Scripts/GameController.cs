@@ -7,14 +7,10 @@ public class GameController : MonoBehaviour {
 
     public PlayerControllerScript player;
     static public GameController instance;
-    static public int counter = 1;
-    private int privateID;
     public Sprite black;
 
     void Awake()
     {
-        privateID = GameController.counter;
-        GameController.counter++;
         //Check if instance already exists
         if (instance == null)
         {
@@ -27,6 +23,9 @@ public class GameController : MonoBehaviour {
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance
             Destroy(gameObject);
         }
+		  // Initialize global game state
+		  GlobeManager.Initialize();
+		  HouseManager.Initialize();
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
     }

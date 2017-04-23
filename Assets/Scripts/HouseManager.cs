@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HouseManager : MonoBehaviour {
+public class HouseManager : MonoBehaviour, IManager {
+
+	static private Dictionary<CollectableType, bool> itemsFound;
+	static private Dictionary<CollectableType, bool> itemsPlaced;
 
     static public bool hatPicked = false;
     static public bool fireplaceUsed = false;
@@ -14,8 +17,10 @@ public class HouseManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        TiddyUp();
-	}
+    }
+
+	 static public void Initialize() {
+	 }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,4 +38,12 @@ public class HouseManager : MonoBehaviour {
 
         }
     }
+
+	public void PlaceItem(CollectableType item) {
+		itemsPlaced[item] = true;
+	}
+
+	public bool HasPlaced(CollectableType item) {
+		return itemsPlaced[item];
+	}
 }

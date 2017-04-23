@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobeManager : MonoBehaviour {
+public class GlobeManager : MonoBehaviour, IManager {
+
+	static private Dictionary<CollectableType, bool> itemsFound;
+	static private Dictionary<CollectableType, bool> itemsPlaced;
 
 	static public bool AxePicked = false;
 	static public bool CoalPicked = false;
@@ -17,21 +20,30 @@ public class GlobeManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("No hats for this snowman!");
-		TidyUp();
 	}
 
-	void TidyUp() {
-		if (AxePicked) {
-			Destroy(GameObject.Find("Axe"));
-		}
-		if (!HatPlaced) {
-			Destroy(GameObject.Find("Hat"));
-		}
+	static public void Initialize() {
+		itemsFound.Add(CollectableType.Axe, false);
+		itemsFound.Add(CollectableType.Coal, false);
+		itemsFound.Add(CollectableType.Wheel, false);
+		itemsFound.Add(CollectableType.Wood, false);
+
+		itemsPlaced.Add(CollectableType.Axe, false);
+		itemsPlaced.Add(CollectableType.Coal, false);
+		itemsPlaced.Add(CollectableType.Hat, false);
+		itemsPlaced.Add(CollectableType.Wheel, false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void PlaceItem(CollectableType item) {
+		itemsPlaced[item] = true;
+	}
+
+	public bool HasPlaced(CollectableType item) {
+		return itemsPlaced[item];
 	}
 }
