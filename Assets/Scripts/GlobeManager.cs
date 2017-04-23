@@ -31,6 +31,7 @@ public class GlobeManager : MonoBehaviour, IManager {
         {
             victory = victory && c.Value;
         }
+        victory = victory && HouseManager.StaticHasPlaced(CollectableType.Wood);
         return victory;
     }
 
