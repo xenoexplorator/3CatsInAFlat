@@ -18,6 +18,7 @@ public class ObjectiveController : MonoBehaviour {
 	}
 
 	protected void PlaceItem(PlayerControllerScript player, CollectableType item) {
+		Debug.Log("It's not very effective...");
 		player.RemoveItem(item);
 		switch(this.type) {
 			case ObjectiveType.Snowman:
@@ -29,16 +30,6 @@ public class ObjectiveController : MonoBehaviour {
 	}
 
 	protected void Interact(PlayerControllerScript player) {
-		for (var i = needed.Count - 1; i >= 0; i--) {
-			var item = needed[i];
-			if (player.HasItem(item)) {
-				this.PlaceItem(player, item);
-				break;
-			}
-		}
-	}
-
-	protected void Examine() {
 		if (player.HasItem(needed)) {
 			PlaceItem(player, needed);
 		}
