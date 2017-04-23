@@ -15,7 +15,6 @@ public class TrainController : ObjectiveController {
     private float currentspeed = 0;
     private float acceleration = 0.01f;
 
-    public BoxCollider2D trainNose;
 
     private void Awake()
     {
@@ -34,7 +33,6 @@ public class TrainController : ObjectiveController {
         }
         if(IsInStation == false)
         {
-            trainNose.enabled = true;
             int h = 1;
             if (positionSide)
                 h = -1;
@@ -43,10 +41,6 @@ public class TrainController : ObjectiveController {
                 gameObject.transform.position.y, 
                 gameObject.transform.position.z);
             currentspeed += acceleration;
-        }
-        else
-        {
-            trainNose.enabled = false;
         }
     }
 
