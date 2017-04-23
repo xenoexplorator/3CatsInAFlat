@@ -44,7 +44,7 @@ public class CameraScript : MonoBehaviour {
         {
             if (cam.orthographicSize < maxFov)
             {
-                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + zoomOutSpeed, minFov, maxFov);
+                cam.orthographicSize = Mathf.Clamp(cam.orthographicSize + (zoomOutSpeed*3), minFov, maxFov);
                 if (cam.orthographicSize == maxFov)
                     idle = true;
             }
