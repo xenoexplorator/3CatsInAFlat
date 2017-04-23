@@ -9,7 +9,7 @@ public class LivePineScript : ObjectiveController
     protected void Awake()
     {
         anim = GetComponent<Animator>();
-        if(false)
+        if(GlobeManager.PineRaised)
         {
             anim.SetTrigger("GetUp");
         }
@@ -17,10 +17,10 @@ public class LivePineScript : ObjectiveController
 
     new protected void Interact(PlayerControllerScript player)
     {
-        if (true) //manager.pinetree == false
+        if (GlobeManager.PineRaised == false) //manager.pinetree == false
         {
             anim.SetTrigger("UnSnow");
-            //manager.pinetree = true;
+            GlobeManager.PineRaised = true;
         }
     }
 }

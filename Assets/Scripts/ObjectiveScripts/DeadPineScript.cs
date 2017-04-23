@@ -9,6 +9,19 @@ public class DeadPineScript : ObjectiveController
     public GameObject rotationPoint;
     public GameObject woodStack;
 
+    new protected void Start()
+    {
+        base.Start();
+        if (manager.HasPlaced(CollectableType.Axe))
+        {
+            if (!manager.HasFound(CollectableType.Wood))
+            {
+                Instantiate(woodStack, rotationPoint.transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
+        }
+    }
+
     new protected void Update()
     {
         if(falling)

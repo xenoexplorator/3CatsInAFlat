@@ -10,6 +10,7 @@ public class TrainController : ObjectiveController {
     private bool IsInStation = true;
     public GameObject leftStationOrigin;
     public GameObject rightStationOrigin;
+    public GameObject particles;
 
     private float maxspeed = 8;
     private float currentspeed = 0;
@@ -31,6 +32,10 @@ public class TrainController : ObjectiveController {
             if(missingWheel.enabled == false)
             {
                 missingWheel.enabled = true;
+            }
+            if (particles.active == false)
+            {
+                particles.SetActive(true);
             }
         }
         if(IsInStation == false)

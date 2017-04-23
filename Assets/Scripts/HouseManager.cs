@@ -36,7 +36,12 @@ public class HouseManager : MonoBehaviour, IManager {
 		return itemsPlaced[item];
 	}
 
-	public bool HasFound(CollectableType item) {
+    public static bool StaticHasPlaced(CollectableType item)
+    {
+        return itemsPlaced[item];
+    }
+
+    public bool HasFound(CollectableType item) {
 		return itemsFound[item];
 	}
 }
